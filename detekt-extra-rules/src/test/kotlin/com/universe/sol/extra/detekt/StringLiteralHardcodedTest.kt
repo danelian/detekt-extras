@@ -1,7 +1,7 @@
-package io.gitlab.arturbosch.detekt.sample.extensions
+package com.universe.sol.extra.detekt
 
 import io.gitlab.arturbosch.detekt.api.Rule
-import io.gitlab.arturbosch.detekt.sample.extensions.rules.StringLiteralHardcoded
+import com.universe.sol.extra.detekt.rules.StringLiteralHardcoded
 import io.gitlab.arturbosch.detekt.test.RuleTest
 import io.gitlab.arturbosch.detekt.test.lint
 import org.assertj.core.api.Assertions.assertThat
@@ -14,10 +14,25 @@ class TooManyFunctionsTest : RuleTest {
 
     @Test
     fun findOneFile() {
-        val findings = rule.lint(code)
+        val findings = rule.lint(code2)
         assertThat(findings).hasSize(1)
     }
+
 }
+
+val code2: String =
+        """
+            @RunWith(AndroidJUnit4::class)
+            class ExampleInstrumentedTest {
+                @Test
+                fun useAppContext() {
+                    // Context of the app under test.
+                    val appContext = InstrumentationRegistry.getTargetContext()
+                    assertEquals("com.universe.sol", appContext.packageName)
+                }
+            }
+
+        """
 
 val code: String =
         """

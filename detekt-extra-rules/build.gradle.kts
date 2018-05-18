@@ -29,7 +29,7 @@ plugins {
 //val kotlinVersion: String by project
 //val assertjVersion: String by project
 val usedDetektVersion: String  by project
-//val junitEngineVersion: String by project
+val junitEngineVersion: String by project
 //val junitPlatformVersion: String by project
 
 val implementation by configurations
@@ -47,8 +47,8 @@ repositories {
 dependencies {
     implementation("io.gitlab.arturbosch.detekt:detekt-api:$usedDetektVersion")
 
-//    testImplementation("io.gitlab.arturbosch.detekt:detekt-test:$usedDetektVersion")
-//    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitEngineVersion")
+    testImplementation("io.gitlab.arturbosch.detekt:detekt-test:$usedDetektVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitEngineVersion")
 //    testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
 //    testImplementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
 //    testImplementation("org.assertj:assertj-core:$assertjVersion")

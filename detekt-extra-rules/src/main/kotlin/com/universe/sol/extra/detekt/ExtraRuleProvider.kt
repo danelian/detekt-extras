@@ -1,16 +1,13 @@
-package io.gitlab.arturbosch.detekt.sample.extensions
+package com.universe.sol.extra.detekt
 
 import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.RuleSet
 import io.gitlab.arturbosch.detekt.api.RuleSetProvider
-import io.gitlab.arturbosch.detekt.sample.extensions.rules.StringLiteralHardcoded
+import com.universe.sol.extra.detekt.rules.StringLiteralHardcoded
 
-/**
- * @author Artur Bosch
- */
-class SampleProvider : RuleSetProvider {
+class ExtraRuleProvider : RuleSetProvider {
 
-    override val ruleSetId: String = "sample"
+    override val ruleSetId: String = "complexity"
 
     override fun instance(config: Config): RuleSet {
         return RuleSet(ruleSetId, listOf(

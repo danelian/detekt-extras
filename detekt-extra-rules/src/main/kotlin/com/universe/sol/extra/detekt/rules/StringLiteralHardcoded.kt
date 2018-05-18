@@ -1,4 +1,4 @@
-package io.gitlab.arturbosch.detekt.sample.extensions.rules
+package com.universe.sol.extra.detekt.rules
 
 import io.gitlab.arturbosch.detekt.api.*
 import org.jetbrains.kotlin.psi.KtAnnotationEntry

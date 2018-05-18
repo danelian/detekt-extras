@@ -1,1 +1,1 @@
-io.gitlab.arturbosch.detekt.sample.extensions.SampleProvider
+com.universe.sol.extra.detekt.ExtraRuleProvider
