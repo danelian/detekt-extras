@@ -1,44 +1,26 @@
 package io.gitlab.arturbosch.detekt.sample.extensions
 
 import io.gitlab.arturbosch.detekt.api.Rule
-import io.gitlab.arturbosch.detekt.sample.extensions.rules.TooManyFunctions
+import io.gitlab.arturbosch.detekt.sample.extensions.rules.StringLiteralHardcoded
 import io.gitlab.arturbosch.detekt.test.RuleTest
 import io.gitlab.arturbosch.detekt.test.lint
 import org.assertj.core.api.Assertions.assertThat
-import org.jetbrains.spek.api.dsl.describe
-import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.subject.SubjectSpek
 import org.junit.jupiter.api.Test
 
-/**
- * @author Artur Bosch
- */
-class TooManyFunctionsSpec : SubjectSpek<TooManyFunctions>({
-
-	subject { TooManyFunctions() }
-
-	describe("a simple test") {
-
-		it("should find one file with too many functions") {
-			val findings = subject.lint(code)
-			assertThat(findings).hasSize(1)
-		}
-	}
-
-})
 
 class TooManyFunctionsTest : RuleTest {
 
-	override val rule: Rule = TooManyFunctions()
+    override val rule: Rule = StringLiteralHardcoded()
 
-	@Test fun findOneFile() {
-		val findings = rule.lint(code)
-		assertThat(findings).hasSize(1)
-	}
+    @Test
+    fun findOneFile() {
+        val findings = rule.lint(code)
+        assertThat(findings).hasSize(1)
+    }
 }
 
 val code: String =
-		"""
+        """
 			class TooManyFunctions : Rule("TooManyFunctions") {
 
 				override fun visitUserType(type: KtUserType) {
