@@ -14,7 +14,7 @@ class TooManyFunctionsTest : RuleTest {
 
     @Test
     fun findOneFile() {
-        val findings = rule.lint(code2)
+        val findings = rule.lint(codeWithLogMessages)
         assertThat(findings).hasSize(1)
     }
 
@@ -28,7 +28,22 @@ val code2: String =
                 fun useAppContext() {
                     // Context of the app under test.
                     val appContext = InstrumentationRegistry.getTargetContext()
-                    assertEquals("com.universe.sol", appContext.packageName)
+//                    assertEquals("com.universe.sol", appContext.packageName)
+                }
+            }
+
+        """
+
+val codeWithLogMessages: String =
+        """
+            @RunWith(AndroidJUnit4::class)
+            class ExampleInstrumentedTest {
+                @Test
+                fun useAppContext() {
+                   Log.d("TAG", "Some log message")
+                   Timber.e(e, "get file from gallery error")
+                   assertEquals("com.universe.sol", appContext.packageName)
+                   some_legal_crypt_function("AES_ALGORITHM")
                 }
             }
 
