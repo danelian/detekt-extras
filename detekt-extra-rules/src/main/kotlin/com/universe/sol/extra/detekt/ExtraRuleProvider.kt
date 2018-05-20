@@ -7,7 +7,7 @@ import com.universe.sol.extra.detekt.rules.StringLiteralHardcoded
 
 class ExtraRuleProvider : RuleSetProvider {
 
-    override val ruleSetId: String = "complexity"
+    override val ruleSetId: String = "extra"
 
     override fun instance(config: Config): RuleSet {
         return RuleSet(ruleSetId, listOf(

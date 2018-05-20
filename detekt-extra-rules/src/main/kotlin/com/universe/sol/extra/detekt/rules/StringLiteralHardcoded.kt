@@ -53,6 +53,9 @@ class StringLiteralHardcoded(
         override fun visitLiteralStringTemplateEntry(entry: KtLiteralStringTemplateEntry) {
             when {
                 ignoreAnnotation && entry.isPartOf(KtAnnotationEntry::class) -> pass
+                entry.isPartOf(KtProperty::class)
+                        || isBinaryExpression(entry)
+                        || entry.isPartOf(KtThrowExpression::class) -> pass
                 ignoreLogMessages && isLog(entry) -> pass
                 ignoreAssert && isAssert(entry) -> pass
                 excludeStringsWithLessThan5Characters && entry.text.length < STRING_EXCLUSION_LENGTH -> pass
@@ -62,13 +65,17 @@ class StringLiteralHardcoded(
         }
 
         private fun isAssert(entry: KtLiteralStringTemplateEntry): Boolean {
-            val methodName = entry.parent.parent.parent.parent.firstChild.text
-            return methodName.equals("assertEquals")
+            val methodName = entry.parent?.parent?.parent?.parent?.firstChild?.text
+            return "assertEquals" == methodName
         }
 
         private fun isLog(entry: KtLiteralStringTemplateEntry): Boolean {
-            val methodName = entry?.parent?.parent?.parent?.parent?.parent?.firstChild?.text
+            val methodName = entry.parent?.parent?.parent?.parent?.parent?.firstChild?.text
             return "Log" == methodName || "Timber" == methodName
+        }
+
+        private fun isBinaryExpression(entry: KtLiteralStringTemplateEntry): Boolean {
+            return entry.parent?.parent is KtBinaryExpression
         }
 
         private fun add(entry: KtLiteralStringTemplateEntry) {

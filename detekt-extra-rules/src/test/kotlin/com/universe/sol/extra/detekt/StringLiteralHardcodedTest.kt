@@ -15,7 +15,7 @@ class TooManyFunctionsTest : RuleTest {
     @Test
     fun findOneFile() {
         val findings = rule.lint(codeWithLogMessages)
-        assertThat(findings).hasSize(1)
+        assertThat(findings).hasSize(2)
     }
 
 }
@@ -40,10 +40,19 @@ val codeWithLogMessages: String =
             class ExampleInstrumentedTest {
                 @Test
                 fun useAppContext() {
+                   activity?.componentName?.className?.contains("Splash") != true
+                   throw IllegalArgumentException("Incorrect keyboard button id")
                    Log.d("TAG", "Some log message")
                    Timber.e(e, "get file from gallery error")
                    assertEquals("com.universe.sol", appContext.packageName)
                    some_legal_crypt_function("AES_ALGORITHM")
+                   photoPickerIntent.type = "image/*"
+                }
+
+                companion object {
+                    const val COMPUTATION_SCHEDULER: String = "COMPUTATION_SCHEDULER"
+                    const val IO_SCHEDULER: String = "IO_SCHEDULER"
+                    const val MAIN_SCHEDULER: String = "MAIN_SCHEDULER"
                 }
             }
 
